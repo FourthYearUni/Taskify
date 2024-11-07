@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Models\Task as TaskModel;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class Task extends Controller
 
     public function get_all():View
     {
-        $tasks = TaskModel::all();
+        $tasks = DB::table('tasks')->orderBy('priority')->orderBy('deadline')->get();
         return view('task.show_all', ['tasks' => $tasks]);
     }
 
@@ -42,7 +43,7 @@ class Task extends Controller
         return redirect()->route('showTasks', ['id' => $id]);
     }
 
-    public function destroy($id): view
+    public function destroy($id): View
     {
         $id = (int) $id;
         TaskModel::where('id', $id)->delete();
