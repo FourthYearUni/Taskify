@@ -30,6 +30,10 @@ class Task extends Controller
         $task = new TaskModel;
         $task->title = $req->title;
         $task->description = $req->description;
+        $task->priority = $req->priority;
+        $task->decayFactor = $req->decayFactor;
+        $task->deadline = $req->deadline;
+        $task->complete = false;
         $task->save();
         return redirect()->route('showTasks', ['id' => $task->id]);
     }

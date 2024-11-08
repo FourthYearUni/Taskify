@@ -8,17 +8,22 @@
 </head>
 <body>
     @foreach ($tasks as $task)
-        <h1>Tasks show</h1>
-        <p>{{ $task->title }}</p>
-        <p>{{ $task->description }}</p>
-        <p>{{ $task->created_at }}</p>
+        <h1>Task</h1>
+        <p>Title: {{ $task->title }}</p>
+        <p>Description: {{ $task->description }}</p>
+        <p>Priority: {{ $task->priority}}</p>
+        <p>Deadline: {{ $task->deadline}}</p>
+        <p>Creation date: {{ $task->created_at }}</p>
 
         <form method="post" action="/tasks/delete/{id}">
             @csrf
             @method('delete')
             <button type="submit"> Delete </button>
         </form>
+        <br>
+        <a href="/tasks/edit/{{$task->id}}">Edit</a>
         <br><br>
+
     @endforeach
 </body>
 </html>
